@@ -321,7 +321,8 @@ export default function AddBlog() {
       }                                         // ✔ same onchange
       placeholder="Enter additional details"    // ✔ same placeholder
       required                                  // ✔ same required
-      rows={6}                                  // ✔ same rows
+      rows={6}                                  // ✔ same rowsgit remote remove origin
+
       className="w-full"
     />
   </div>
