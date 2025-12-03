@@ -26,6 +26,7 @@ export default function AddBlog() {
     desc: "",
     extraDesc: "",
     author: "",
+    keywords: "", 
     isFeature: false
   });
 
@@ -340,6 +341,24 @@ export default function AddBlog() {
               placeholder="John Doe"
             />
           </div>
+          <div className="mt-4">
+  <label className="block text-gray-700 font-medium mb-2">SEO Keywords *</label>
+
+  <input
+    type="text"
+    name="keywords"
+    placeholder="Enter keywords (comma separated)"
+    value={formData.keywords}
+    onChange={handleChange}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
+    required
+  />
+
+  <p className="text-xs text-gray-500 mt-1">
+    Example: cybersecurity, AI, cloud security, digital transformation
+  </p>
+</div>
+
           {/* input for asking to add blog to featured only true false */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">Featured *</label>
