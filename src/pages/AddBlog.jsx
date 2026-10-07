@@ -137,6 +137,12 @@ export default function AddBlog() {
       return;
     }
 
+    // MDEditor ignores `required`, so check the markdown fields here
+    if (!formData.desc.trim() || !formData.extraDesc.trim()) {
+      alert("Please fill in both Description and Extra Description.");
+      return;
+    }
+
     setLoading(true);
 
     let response;
