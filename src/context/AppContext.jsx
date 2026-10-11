@@ -7,11 +7,27 @@ export const AppProvider = ({ children }) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [totalBlogs, setTotalBlogs] = useState(0);
     const [admin, setAdmin] = useState({});
+
+    // Admin-only API calls send the login token; an expired token logs out.
+    const authFetch = async (url, options = {}) => {
+      const token = localStorage.getItem("BIMAdminToken");
+      const response = await fetch(url, {
+        ...options,
+        headers: { ...(options.headers || {}), Authorization: `Bearer ${token}` },
+      });
+      if (response.status === 401) {
+        localStorage.removeItem("BIMAdminToken");
+        localStorage.removeItem("BIMAdmin");
+        window.location.href = "/login";
+      }
+      return response;
+    };
+
     const getAdmin = async()=>{
         try {
-            const response = await fetch(`${backendUrl}/api/admin`);
+            const response = await authFetch(`${backendUrl}/api/admin`);
             const data = await response.json();
-            return data[0];
+            return Array.isArray(data) ? data[0] : undefined;
         } catch (error) {
             console.log(error);
         }
@@ -60,7 +76,7 @@ export const AppProvider = ({ children }) => {
 
   const addBlog = async (blogData) => {
     try {
-      const response = await fetch(`${backendUrl}/api/blog`, {
+      const response = await authFetch(`${backendUrl}/api/blog`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +93,7 @@ export const AppProvider = ({ children }) => {
 
   const updateBlog = async (id, blogData) => {
     try {
-      const response = await fetch(`${backendUrl}/api/blog/${id}`, {
+      const response = await authFetch(`${backendUrl}/api/blog/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +110,7 @@ export const AppProvider = ({ children }) => {
 
   const deleteBlog = async (id) => {
     try {
-      const response = await fetch(`${backendUrl}/api/blog/${id}`, {
+      const response = await authFetch(`${backendUrl}/api/blog/${id}`, {
         method: "DELETE",
       });
       const data = await response.json();

@@ -145,6 +145,16 @@ export default function Blogs() {
                           <p className="text-gray-500 text-sm">
                             By {blog.author}
                           </p>
+                          {blog.slug && (
+                            <a
+                              href={`https://bim.africa/blog/${blog.slug}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 text-sm hover:underline break-all"
+                            >
+                              bim.africa/blog/{blog.slug}
+                            </a>
+                          )}
                         </div>
                         <div className="flex gap-2 ml-4">
                           <button

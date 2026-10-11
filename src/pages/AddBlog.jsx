@@ -50,6 +50,7 @@ export default function AddBlog() {
         desc: response.desc || "",
         extraDesc: response.extraDesc || "",
         author: response.author || "",
+        keywords: response.keywords || "",
         isFeature: response.isFeature || false
       });
     } else {
@@ -328,7 +329,7 @@ export default function AddBlog() {
       }                                         // ✔ same onchange
       placeholder="Enter additional details"    // ✔ same placeholder
       required                                  // ✔ same required
-      rows={6}                                  // ✔ same rowsgit remote remove origin
+      rows={6}                                  // ✔ same rows
 
       className="w-full"
     />
