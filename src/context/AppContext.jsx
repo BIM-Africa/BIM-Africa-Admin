@@ -42,6 +42,7 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      if (!response.ok) return { error: data.error || data.message || "Request failed" };
       return data;
     } catch (error) {
       console.log(error);
@@ -55,6 +56,7 @@ export const AppProvider = ({ children }) => {
         `${backendUrl}/api/blogs?page=${page}&limit=${limit}`
       );
       const data = await response.json();
+      if (!response.ok) return { error: data.error || data.message || "Request failed" };
       return data;
     } catch (error) {
       console.log(error);
@@ -67,6 +69,7 @@ export const AppProvider = ({ children }) => {
     try {
       const response = await fetch(`${backendUrl}/api/blog/${id}`);
       const data = await response.json();
+      if (!response.ok) return { error: data.error || data.message || "Request failed" };
       return data;
     } catch (error) {
       console.log(error);
@@ -84,6 +87,7 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify(blogData),
       });
       const data = await response.json();
+      if (!response.ok) return { error: data.error || data.message || "Request failed" };
       return data;
     } catch (error) {
       console.log(error);
@@ -101,6 +105,7 @@ export const AppProvider = ({ children }) => {
         body: JSON.stringify(blogData),
       });
       const data = await response.json();
+      if (!response.ok) return { error: data.error || data.message || "Request failed" };
       return data;
     } catch (error) {
       console.log(error);
@@ -114,6 +119,7 @@ export const AppProvider = ({ children }) => {
         method: "DELETE",
       });
       const data = await response.json();
+      if (!response.ok) return { error: data.error || data.message || "Request failed" };
       return data;
     } catch (error) {
       console.log(error);

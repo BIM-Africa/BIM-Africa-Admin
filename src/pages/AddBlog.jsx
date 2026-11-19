@@ -26,6 +26,8 @@ export default function AddBlog() {
     desc: "",
     extraDesc: "",
     author: "",
+    seoTitle: "",
+    seoDescription: "",
     keywords: "", 
     isFeature: false
   });
@@ -50,6 +52,8 @@ export default function AddBlog() {
         desc: response.desc || "",
         extraDesc: response.extraDesc || "",
         author: response.author || "",
+        seoTitle: response.seoTitle || "",
+        seoDescription: response.seoDescription || "",
         keywords: response.keywords || "",
         isFeature: response.isFeature || false
       });
@@ -349,7 +353,15 @@ export default function AddBlog() {
             />
           </div>
           <div className="mt-4">
-  <label className="block text-gray-700 font-medium mb-2">SEO Keywords *</label>
+  <label htmlFor="seoTitle" className="block text-gray-700 font-medium mb-2">SEO title (optional)</label>
+  <input id="seoTitle" name="seoTitle" value={formData.seoTitle} onChange={handleChange} maxLength={120}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Defaults to article title | BIM Africa" />
+  <p className="text-xs text-gray-500 mt-1">Aim for around 50–60 characters. {formData.seoTitle.length}/120</p>
+  <label htmlFor="seoDescription" className="block text-gray-700 font-medium mt-4 mb-2">SEO description (optional)</label>
+  <textarea id="seoDescription" name="seoDescription" value={formData.seoDescription} onChange={handleChange} maxLength={320} rows={3}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Summarise this article for search results" />
+  <p className="text-xs text-gray-500 mt-1">Aim for around 140–160 characters. Defaults to the article excerpt. {formData.seoDescription.length}/320</p>
+  <label className="block text-gray-700 font-medium mt-4 mb-2">Topic keywords (optional)</label>
 
   <input
     type="text"
@@ -358,11 +370,10 @@ export default function AddBlog() {
     value={formData.keywords}
     onChange={handleChange}
     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none"
-    required
   />
 
   <p className="text-xs text-gray-500 mt-1">
-    Example: cybersecurity, AI, cloud security, digital transformation
+    For topic organisation; Google does not use meta keywords for ranking. Example: cybersecurity, website design
   </p>
 </div>
 
